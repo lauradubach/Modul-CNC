@@ -113,3 +113,14 @@ history       View rollout history
   status        Show the status of the rollout
   undo          Undo a previous rollout
 ```
+# Kubernetes Resourcen als YAML-Dateien
+
+Ein Deployment ausgeben:
+
+`kubectl create deployment <DEPLOYMENT_NAME> --image=<IMAGE_NAME> --dry-run=client`
+
+Dem Cluster übergeben: 
+
+`kubectl apply -f <DATEI_NAME>`
+
+Nun sieht man unter k9s das neue deployment
