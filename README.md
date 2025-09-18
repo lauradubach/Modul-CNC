@@ -119,7 +119,7 @@ Ein Deployment ausgeben:
 
 `kubectl create deployment <DEPLOYMENT_NAME> --image=<IMAGE_NAME> --dry-run=client`
 
-Dem Cluster übergeben: 
+Dem Cluster übergeben:
 
 `kubectl apply -f <DATEI_NAME>`
 
