@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager-hetzner-webhook
+  namespace: argocd
+spec:
+  destination:
+    namespace: laura-dubach
+    server: https://kubernetes.default.svc
+  project: cluster-infrastructure
+  sources:
+    - repoURL: https://git.pew.io/clusters/talos-tbz-gitops.git
+      targetRevision: main
+      ref: helmvalues
+    - repoURL: https://vadimkim.github.io/cert-manager-webhook-hetzner
+      targetRevision: 1.4.0
+      chart: cert-manager-webhook-hetzner
+      helm:
+        valueFiles:
+        - $helmvalues/argocd/cert-manager/values-webhook.yaml
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+      enabled: true
+    syncOptions:
+      - CreateNamespace=false

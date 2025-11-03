@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: laura-dubach
+  namespace: argocd
+spec:
+  destination:
+    namespace: laura-dubach
+    server: https://kubernetes.default.svc
+  project: cluster-infrastructure
+  sources:
+    - path: argocd/laura-dubach
+      repoURL: https://git.pew.io/clusters/talos-tbz-gitops.git
+      targetRevision: main
+      kustomize: {}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      enabled: true
+    syncOptions:
+      - CreateNamespace=true

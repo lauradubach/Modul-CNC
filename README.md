@@ -124,3 +124,59 @@ Dem Cluster übergeben:
 `kubectl apply -f <DATEI_NAME>`
 
 Nun sieht man unter k9s das neue deployment
+
+# Argo erklärung
+
+Stell dir vor, du hast ein Heft (Git-Repository):
+
+In diesem Heft schreibst du ganz genau auf, wie deine App im Kubernetes-Cluster aussehen soll (z. B. wie viele Pods, welches Image, welche Umgebungsvariablen).
+
+Dieses Heft ist also deine Single Source of Truth = die Wahrheit, wie es sein soll.
+
+Normalerweise ohne Argo CD:
+
+Du müsstest selbst hingehen und die Sachen aus dem Heft (YAML-Files) manuell in den Cluster reinwerfen (kubectl apply).
+
+Wenn du etwas änderst, musst du wieder manuell loslaufen.
+
+Vergisst du es oder machst Tippfehler → Chaos.
+
+Mit Argo CD:
+
+Argo CD ist wie ein Roboter-Hausmeister, der ständig:
+
+In dein Heft (Git) schaut → „Wie soll es sein?“
+
+In den Cluster schaut → „Wie ist es gerade?“
+
+Wenn’s nicht passt, repariert er es automatisch oder sagt dir Bescheid.
+
+Warum ist das cool?
+
+Du musst nicht mehr ins Cluster reinfummeln → alles wird über Git gesteuert.
+
+Änderungen sind nachvollziehbar: Wer hat wann was geändert? (Git-Log).
+
+Rückgängig machen? Einfach im Git die Änderung zurückdrehen → Argo CD stellt den alten Zustand wieder her.
+
+👉 Merksatz:
+Argo CD = der Git-Polizist fürs Kubernetes-Cluster.
+Es sorgt dafür, dass der Cluster immer so aussieht, wie es in Git beschrieben ist – nicht mehr, nicht weniger.
+
+# Aufbau Kubernetes:
+
+![diagramm](image.png)
+
+## Push Image to Ducker Hub
+ 
+Login in Docker Hub über Browser und repository erstellt
+ 
+cd into src folder
+ 
+docker login
+ 
+docker build -t lauradubach/musicfinder:latest -f Dockerfile.prod .
+ 
+docker buildx build -t lauradubach/musicfinder:latest -f Dockerfile.prod .
+ 
+docker push lauradubach/musicfinder:latest
