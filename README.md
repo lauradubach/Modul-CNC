@@ -180,3 +180,5 @@ docker build -t lauradubach/musicfinder:latest -f Dockerfile.prod .
 docker buildx build -t lauradubach/musicfinder:latest -f Dockerfile.prod .
  
 docker push lauradubach/musicfinder:latest
+
+![RBAC](image-1.png)
